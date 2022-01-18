@@ -64,18 +64,18 @@ WORKDIR /app
 
 
 # Copy only requirements, to cache them in docker layer
-COPY ./poetry.* ./pyproject.* /app/
-
-# Project initialization:
-RUN echo "$POETRY_ENV" && poetry version \
-  && poetry install \
-    $(if [ "$POETRY_ENV" = 'production' ]; then echo '--no-dev'; fi) \
-    --no-interaction --no-ansi \
-  && poetry run pre-commit install \
-    # Upgrading pip, it is insecure, remove after `pip@21.1`
-  && poetry run pip install -U pip \
-  # Cleaning poetry installation's cache for production:
-  && if [ "$POETRY_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
+#COPY ./poetry.* ./pyproject.* /app/
+#
+## Project initialization:
+#RUN echo "$POETRY_ENV" && poetry version \
+#  && poetry install \
+#    $(if [ "$POETRY_ENV" = 'production' ]; then echo '--no-dev'; fi) \
+#    --no-interaction --no-ansi \
+#  && poetry run pre-commit install \
+#    # Upgrading pip, it is insecure, remove after `pip@21.1`
+#  && poetry run pip install -U pip \
+#  # Cleaning poetry installation's cache for production:
+#  && if [ "$POETRY_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
 
 EXPOSE 80
 
