@@ -1,10 +1,6 @@
 FROM python:3.8.12-slim-buster
 
-ARG FASTAPI_ENV
-
-ENV FASTAPI_ENV=${FASTAPI_ENV} \
-  # build:
-  BUILD_ONLY_PACKAGES='wget' \
+ENV BUILD_ONLY_PACKAGES='wget' \
   # python:
   PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1 \
@@ -68,17 +64,17 @@ WORKDIR /app
 
 # Copy only requirements, to cache them in docker layer
 COPY ./poetry.lock ./pyproject.toml /app/
-
-# Project initialization:
-RUN echo "$FASTAPI_ENV" && poetry version \
-  && poetry install \
-    $(if [ "$FASTAPI_ENV" = 'production' ]; then echo '--no-dev'; fi) \
-    --no-interaction --no-ansi \
-  && poetry run pre-commit install \
-    # Upgrading pip, it is insecure, remove after `pip@21.1`
-  && poetry run pip install -U pip \
-  # Cleaning poetry installation's cache for production:
-  && if [ "$FASTAPI_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
+#
+## Project initialization:
+#RUN echo "$FASTAPI_ENV" && poetry version \
+#  && poetry install \
+#    $(if [ "$FASTAPI_ENV" = 'production' ]; then echo '--no-dev'; fi) \
+#    --no-interaction --no-ansi \
+#  && poetry run pre-commit install \
+#    # Upgrading pip, it is insecure, remove after `pip@21.1`
+#  && poetry run pip install -U pip \
+#  # Cleaning poetry installation's cache for production:
+#  && if [ "$FASTAPI_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
 
 EXPOSE 80
 
