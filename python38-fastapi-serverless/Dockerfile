@@ -64,8 +64,7 @@ WORKDIR /app
 
 
 # Copy only requirements, to cache them in docker layer
-COPY poetry.lock /app
-COPY pyproject.toml /app
+COPY ./poetry.lock ./pyproject.toml /app/
 #
 ## Project initialization:
 RUN echo "$POETRY_ENV" && poetry version \
