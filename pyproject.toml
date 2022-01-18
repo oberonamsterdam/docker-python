@@ -21,6 +21,8 @@ mangum = "^0.12.3"
 pre-commit = "^2.16.0"
 pylint = "^2.12.2"
 black = "^21.12b0"
+tortoise-orm = "^0.18.1"
+aiomysql = "^0.0.22"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
