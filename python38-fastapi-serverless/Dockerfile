@@ -80,5 +80,5 @@ RUN echo "$POETRY_ENV" && poetry version \
 EXPOSE 80
 
 # We customize how our app is loaded with the custom entrypoint:
-COPY ./docker/docker-entrypoint.sh  /docker-entrypoint.sh
-RUN chmod +x '/docker-entrypoint.sh'
+#COPY ./docker/docker-entrypoint.sh  /docker-entrypoint.sh
+#RUN chmod +x '/docker-entrypoint.sh'
