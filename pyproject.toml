@@ -2,7 +2,7 @@
 name = "easybroker-python"
 version = "0.1.0"
 description = ""
-authors = ["Filipe Santos <filipe@oberon.nl>"]
+authors = ["Oberon"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
