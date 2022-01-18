@@ -80,7 +80,7 @@ RUN echo "$FASTAPI_ENV" && poetry version \
   # Cleaning poetry installation's cache for production:
   && if [ "$FASTAPI_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
 
-#EXPOSE 80
+EXPOSE 80
 
 # We customize how our app is loaded with the custom entrypoint:
 #COPY ./docker/docker-entrypoint-${FASTAPI_ENV}.sh  /docker-entrypoint.sh
