@@ -71,7 +71,6 @@ RUN echo "$POETRY_ENV" && poetry version \
   && poetry install \
     $(if [ "$POETRY_ENV" = 'production' ]; then echo '--no-dev'; fi) \
     --no-interaction --no-ansi \
-  && poetry run pre-commit install \
     # Upgrading pip, it is insecure, remove after `pip@21.1`
   && poetry run pip install -U pip \
   # Cleaning poetry installation's cache for production:
