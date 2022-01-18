@@ -64,7 +64,7 @@ WORKDIR /app
 
 
 # Copy only requirements, to cache them in docker layer
-COPY ./poetry.lock ./pyproject.toml /app/
+COPY ./poetry.lock ./pyproject.toml ./docker-entrypoint.sh /app/
 #
 ## Project initialization:
 RUN echo "$POETRY_ENV" && poetry version \
@@ -79,6 +79,6 @@ RUN echo "$POETRY_ENV" && poetry version \
 EXPOSE 80
 
 # We customize how our app is loaded with the custom entrypoint:
-RUN chmod +x '/docker-entrypoint.sh'
+RUN chmod +x './docker-entrypoint.sh'
 
 ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
