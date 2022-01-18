@@ -64,23 +64,21 @@ WORKDIR /app
 
 
 # Copy only requirements, to cache them in docker layer
-#COPY ./poetry.* ./pyproject.* /app/
+COPY ./poetry.lock ./pyproject.toml /app/
 #
 ## Project initialization:
-#RUN echo "$POETRY_ENV" && poetry version \
-#  && poetry install \
-#    $(if [ "$POETRY_ENV" = 'production' ]; then echo '--no-dev'; fi) \
-#    --no-interaction --no-ansi \
-#  && poetry run pre-commit install \
-#    # Upgrading pip, it is insecure, remove after `pip@21.1`
-#  && poetry run pip install -U pip \
-#  # Cleaning poetry installation's cache for production:
-#  && if [ "$POETRY_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
+RUN echo "$POETRY_ENV" && poetry version \
+  && poetry install \
+    $(if [ "$POETRY_ENV" = 'production' ]; then echo '--no-dev'; fi) \
+    --no-interaction --no-ansi \
+  && poetry run pre-commit install \
+    # Upgrading pip, it is insecure, remove after `pip@21.1`
+  && poetry run pip install -U pip \
+  # Cleaning poetry installation's cache for production:
+  && if [ "$POETRY_ENV" = 'production' ]; then rm -rf "$POETRY_CACHE_DIR"; fi
 
 EXPOSE 80
 
 # We customize how our app is loaded with the custom entrypoint:
-#COPY ./docker/docker-entrypoint-${FASTAPI_ENV}.sh  /docker-entrypoint.sh
-#RUN chmod +x '/docker-entrypoint.sh'
-
-#ENTRYPOINT ["tini", "--", "/docker-entrypoint.sh"]
+COPY ./docker/docker-entrypoint.sh  /docker-entrypoint.sh
+RUN chmod +x '/docker-entrypoint.sh'
