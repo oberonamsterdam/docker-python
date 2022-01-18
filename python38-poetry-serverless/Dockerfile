@@ -63,7 +63,7 @@ WORKDIR /app
 
 
 # Copy only requirements, to cache them in docker layer
-COPY ./poetry.lock ./pyproject.toml /app/
+
 #
 ## Project initialization:
 #RUN echo "$FASTAPI_ENV" && poetry version \
