@@ -23,6 +23,7 @@ pylint = "^2.12.2"
 black = "^21.12b0"
 tortoise-orm = "^0.18.1"
 aiomysql = "^0.0.22"
+pyhumps = "^3.5.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
